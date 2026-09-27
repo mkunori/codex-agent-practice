@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello, World!");
+return GreetingApplication.Run(args, Console.Out, Console.Error);
