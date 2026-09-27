@@ -1,0 +1,18 @@
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Local IDE settings
+.vs/
+.idea/
+*.user
+*.suo
+
+# Test outputs
+TestResults/
+*.trx
+
+# Local secrets
+.env
+.env.*
+!.env.example
