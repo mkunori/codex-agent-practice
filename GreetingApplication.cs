@@ -4,9 +4,22 @@ public static class GreetingApplication
     {
         var name = "Codex Agent Practice";
         var uppercase = false;
+        var repeat = 1;
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (args[i] == "--repeat")
+            {
+                if (i + 1 >= args.Length || !int.TryParse(args[i + 1], out repeat) || repeat <= 0)
+                {
+                    error.WriteLine("Error: --repeat requires a positive integer.");
+                    return 1;
+                }
+
+                i++;
+                continue;
+            }
+
             if (args[i] == "--uppercase")
             {
                 uppercase = true;
@@ -29,7 +42,15 @@ public static class GreetingApplication
         }
 
         var greeting = $"Hello, {name}!";
-        output.WriteLine(uppercase ? greeting.ToUpperInvariant() : greeting);
+        if (uppercase)
+        {
+            greeting = greeting.ToUpperInvariant();
+        }
+
+        for (var i = 0; i < repeat; i++)
+        {
+            output.WriteLine(greeting);
+        }
         return 0;
     }
 }
