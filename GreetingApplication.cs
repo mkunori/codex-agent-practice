@@ -3,9 +3,16 @@ public static class GreetingApplication
     public static int Run(string[] args, TextWriter output, TextWriter error)
     {
         var name = "Codex Agent Practice";
+        var uppercase = false;
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (args[i] == "--uppercase")
+            {
+                uppercase = true;
+                continue;
+            }
+
             if (args[i] != "--name")
             {
                 error.WriteLine($"Error: Unknown argument '{args[i]}'.");
@@ -21,7 +28,8 @@ public static class GreetingApplication
             name = args[++i];
         }
 
-        output.WriteLine($"Hello, {name}!");
+        var greeting = $"Hello, {name}!";
+        output.WriteLine(uppercase ? greeting.ToUpperInvariant() : greeting);
         return 0;
     }
 }
