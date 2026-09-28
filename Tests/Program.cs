@@ -3,7 +3,13 @@ var cases = new (string Name, string[] Args, string Output, string Error, int Ex
     ("No arguments", [], "Hello, Codex Agent Practice!", "", 0),
     ("Named greeting", ["--name", "Alice"], "Hello, Alice!", "", 0),
     ("Missing name", ["--name"], "", "Error: --name requires a name.", 1),
-    ("Unknown argument", ["--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
+    ("Unknown argument", ["--unknown"], "", "Error: Unknown argument '--unknown'.", 1),
+    ("Uppercase default greeting", ["--uppercase"], "HELLO, CODEX AGENT PRACTICE!", "", 0),
+    ("Uppercase after name", ["--name", "Alice", "--uppercase"], "HELLO, ALICE!", "", 0),
+    ("Uppercase before name", ["--uppercase", "--name", "Alice"], "HELLO, ALICE!", "", 0),
+    ("Missing name before uppercase", ["--name", "--uppercase"], "", "Error: --name requires a name.", 1),
+    ("Missing name after uppercase", ["--uppercase", "--name"], "", "Error: --name requires a name.", 1),
+    ("Unknown argument with uppercase", ["--uppercase", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
 };
 
 var failures = 0;
