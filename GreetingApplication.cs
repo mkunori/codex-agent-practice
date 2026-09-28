@@ -2,7 +2,7 @@ public static class GreetingApplication
 {
     public static int Run(string[] args, TextWriter output, TextWriter error)
     {
-        var name = "Broken Practice";
+        var name = "Codex Agent Practice";
 
         for (var i = 0; i < args.Length; i++)
         {
