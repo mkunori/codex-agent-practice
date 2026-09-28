@@ -9,7 +9,26 @@ var cases = new (string Name, string[] Args, string Output, string Error, int Ex
     ("Uppercase before name", ["--uppercase", "--name", "Alice"], "HELLO, ALICE!", "", 0),
     ("Missing name before uppercase", ["--name", "--uppercase"], "", "Error: --name requires a name.", 1),
     ("Missing name after uppercase", ["--uppercase", "--name"], "", "Error: --name requires a name.", 1),
-    ("Unknown argument with uppercase", ["--uppercase", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
+    ("Unknown argument with uppercase", ["--uppercase", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1),
+    ("Repeat default greeting", ["--repeat", "3"], Repeat("Hello, Codex Agent Practice!", 3), "", 0),
+    ("Repeat named greeting", ["--name", "Alice", "--repeat", "2"], Repeat("Hello, Alice!", 2), "", 0),
+    ("Repeat uppercase greeting", ["--uppercase", "--repeat", "2"], Repeat("HELLO, CODEX AGENT PRACTICE!", 2), "", 0),
+    ("Name uppercase repeat", ["--name", "Alice", "--uppercase", "--repeat", "2"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Name repeat uppercase", ["--name", "Alice", "--repeat", "2", "--uppercase"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Uppercase name repeat", ["--uppercase", "--name", "Alice", "--repeat", "2"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Uppercase repeat name", ["--uppercase", "--repeat", "2", "--name", "Alice"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Repeat name uppercase", ["--repeat", "2", "--name", "Alice", "--uppercase"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Repeat uppercase name", ["--repeat", "2", "--uppercase", "--name", "Alice"], Repeat("HELLO, ALICE!", 2), "", 0),
+    ("Repeat once", ["--repeat", "1"], "Hello, Codex Agent Practice!", "", 0),
+    ("Missing repeat value", ["--repeat"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Zero repeat", ["--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Negative repeat", ["--repeat", "-1"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Non-numeric repeat", ["--repeat", "abc"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Fractional repeat", ["--repeat", "1.5"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Overflow repeat", ["--repeat", "2147483648"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Option instead of repeat value", ["--repeat", "--uppercase"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Missing name with repeat", ["--repeat", "2", "--name"], "", "Error: --name requires a name.", 1),
+    ("Unknown argument with repeat", ["--repeat", "2", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
 };
 
 var failures = 0;
@@ -37,6 +56,8 @@ Console.WriteLine($"{cases.Length - failures} passed, {failures} failed.");
 return failures == 0 ? 0 : 1;
 
 static string Line(string value) => value.Length == 0 ? "" : value + Environment.NewLine;
+
+static string Repeat(string value, int count) => string.Join(Environment.NewLine, Enumerable.Repeat(value, count));
 
 static void AssertEqual<T>(string field, T expected, T actual)
 {
