@@ -6,7 +6,7 @@
 
 人間は Issue で目的・期待する動作・完了条件を定義し、PR をレビューし、変更内容と merge を承認します。Codex は Issue と既存実装を読み、branch 作成、実装、テスト、commit / push、PR 作成、CI の確認と修正を担当します。仕様の判断が必要な点は人間に確認し、合意済みの範囲内の実装方法は Codex が判断します。
 
-本書は各仕組みの配置と使い方を説明します。行動ルールの正本は [AGENTS.md](../AGENTS.md)、具体的な作業手順の正本は [issue-to-pr Skill](../.codex/skills/issue-to-pr/SKILL.md)です。
+本書は各仕組みの配置と使い方を説明します。行動ルールの正本は [AGENTS.md](../AGENTS.md)、具体的な作業手順の正本は [issue-to-pr Skill](../.agents/skills/issue-to-pr/SKILL.md)です。
 
 ## 各仕組みの責務
 
@@ -14,7 +14,7 @@
 | --- | --- |
 | [AGENTS.md](../AGENTS.md) | 作業全般に共通する方針。変更範囲、承認、検証、報告、レビュー対応の原則 |
 | [Issue Form](../.github/ISSUE_TEMPLATE/feature.yml) | 個々の機能の仕様。概要・目的、期待する動作、境界条件、必要なテスト、完了条件 |
-| [issue-to-pr Skill](../.codex/skills/issue-to-pr/SKILL.md) | Issue 実装依頼をレビュー可能な PR まで進める、特定タスク用の手順 |
+| [issue-to-pr Skill](../.agents/skills/issue-to-pr/SKILL.md) | Issue 実装依頼をレビュー可能な PR まで進める、特定タスク用の手順 |
 | [PR template](../.github/pull_request_template.md) | 関連 Issue、Summary、Validation、CI、Notes を記録する形式 |
 | [GitHub Actions CI](../.github/workflows/ci.yml) | 実行可能な build / test の定義。変更が既存の検証を通るか判定 |
 | [Ruleset](https://github.com/mkunori/codex-agent-practice/rules/24104295) | GitHub 側で PR 経由の変更・必須チェック・ブランチ保護を強制 |
@@ -90,7 +90,7 @@ dotnet run --project Tests/CodexAgentPractice.Tests.csproj --configuration Relea
 
 Codex に認識されている場合は、`$issue-to-pr を使って Issue #XX を実装してください` と明示できます。Issue 実装依頼と description が一致すると自動選択されることも期待できますが、依頼文だけから実際の利用を断定はできません。明示・自動選択の仕組みは [OpenAI の Skill ドキュメント](https://developers.openai.com/codex/skills/)を参照してください。
 
-このリポジトリの保存先は `.codex/skills/issue-to-pr/SKILL.md` です。一方、上記公式ドキュメントの現在の repo Skill 探索先は `.agents/skills` です。使用する Codex 環境で Skill 一覧や読み込み状況を確認してください。認識されない場合は既存ファイルのパスを指定して読むよう依頼できますが、それを自動選択の確認とは扱いません。配置の変更は別途判断し、本書では現在の保存先を説明しています。
+このリポジトリでは、公式の repo Skill 探索先である `.agents/skills` 配下の `.agents/skills/issue-to-pr/SKILL.md` を使用します。使用する Codex 環境で `/skills` または Skill 一覧から認識状況を確認してください。ファイルの存在確認だけで、Skill が認識・自動選択されたとは判断しません。
 
 ## 新しいリポジトリへ持ち込む場合
 

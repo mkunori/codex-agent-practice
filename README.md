@@ -23,7 +23,7 @@ Feature Issue に仕様と完了条件を書き、Codex に `Issue #XX を実装
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | Codex が守る共通の開発・承認・検証ルール |
 | [Issue Form](.github/ISSUE_TEMPLATE/feature.yml) | 実装可能な仕様と完了条件を入力する入口 |
-| [issue-to-pr Skill](.codex/skills/issue-to-pr/SKILL.md) | Issue からレビュー可能な PR までの再利用可能な手順 |
+| [issue-to-pr Skill](.agents/skills/issue-to-pr/SKILL.md) | Issue からレビュー可能な PR までの再利用可能な手順 |
 | [PR template](.github/pull_request_template.md) | 変更内容・検証結果・関連 Issue をレビュー相手へ伝える形式 |
 | [GitHub Actions CI](.github/workflows/ci.yml) | main 向け PR と main への push の build / test |
 | [Ruleset](https://github.com/mkunori/codex-agent-practice/rules/24104295) | PR・必須チェック・main 保護を GitHub 側で強制する設定 |
