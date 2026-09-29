@@ -3,11 +3,24 @@ public static class GreetingApplication
     public static int Run(string[] args, TextWriter output, TextWriter error)
     {
         var name = "Codex Agent Practice";
+        var greetingWord = "Hello";
         var uppercase = false;
         var repeat = 1;
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (args[i] == "--greeting")
+            {
+                if (i + 1 >= args.Length || string.IsNullOrWhiteSpace(args[i + 1]) || args[i + 1].StartsWith("--"))
+                {
+                    error.WriteLine("Error: --greeting requires a greeting.");
+                    return 1;
+                }
+
+                greetingWord = args[++i];
+                continue;
+            }
+
             if (args[i] == "--repeat")
             {
                 if (i + 1 >= args.Length || !int.TryParse(args[i + 1], out repeat) || repeat <= 0)
@@ -41,7 +54,7 @@ public static class GreetingApplication
             name = args[++i];
         }
 
-        var greeting = $"Hello, {name}!";
+        var greeting = $"{greetingWord}, {name}!";
         if (uppercase)
         {
             greeting = greeting.ToUpperInvariant();
