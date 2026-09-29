@@ -1,0 +1,48 @@
+name: Feature
+description: 機能の目的と期待する動作を共有します。
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要 / 目的
+      description: 何を追加・変更し、どんな問題を解決したいかを記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 期待する動作
+      description: 入力と出力の例、既定の動作、既存機能との組み合わせを記載してください。
+      placeholder: |
+        実行例: dotnet run -- ...
+        期待する出力: ...
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: エラー処理や境界条件
+      description: 値の指定漏れ・不正値・許容範囲や、維持する既存動作を記載してください。該当しない場合は「該当なし」と明記してください。
+      placeholder: エラー時の出力先、終了コードなど
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: 必要なテスト
+      description: 特に確認したいケースがあれば記載してください。未記入の場合は、上記仕様からCodexが必要なテストを判断します。
+      placeholder: 正常系、異常系、既存オプションとの組み合わせなど
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: この機能固有の確認条件を追加・調整してください。
+      value: |
+        - 期待する動作とエラー処理を満たしている
+        - 既存機能が壊れていない
+        - 新規テストを含む全自動テストが成功する
+        - CIのbuild-and-testが成功する
+    validations:
+      required: true
