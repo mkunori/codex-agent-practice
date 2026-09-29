@@ -61,7 +61,27 @@ var cases = new (string Name, string[] Args, string Output, string Error, int Ex
     ("Missing name with punctuation", ["--punctuation", "?", "--name"], "", "Error: --name requires a name.", 1),
     ("Missing greeting with punctuation", ["--punctuation", "?", "--greeting"], "", "Error: --greeting requires a greeting.", 1),
     ("Invalid repeat with punctuation", ["--punctuation", "?", "--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
-    ("Unknown argument with punctuation", ["--punctuation", "?", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
+    ("Unknown argument with punctuation", ["--punctuation", "?", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1),
+    ("Separator", ["--separator", ": "], "Hello: Codex Agent Practice!", "", 0),
+    ("Name with separator", ["--name", "Alice", "--separator", " - "], "Hello - Alice!", "", 0),
+    ("Greeting with separator", ["--greeting", "Hi", "--separator", ": "], "Hi: Codex Agent Practice!", "", 0),
+    ("Punctuation with separator", ["--punctuation", "?", "--separator", ": "], "Hello: Codex Agent Practice?", "", 0),
+    ("Uppercase with separator", ["--uppercase", "--separator", ": "], "HELLO: CODEX AGENT PRACTICE!", "", 0),
+    ("Repeat with separator", ["--repeat", "2", "--separator", ": "], Repeat("Hello: Codex Agent Practice!", 2), "", 0),
+    ("All options with separator", ["--name", "Alice", "--greeting", "Hi", "--separator", ": ", "--punctuation", "?", "--uppercase", "--repeat", "2"], Repeat("HI: ALICE?", 2), "", 0),
+    ("Separator first", ["--separator", ": ", "--repeat", "2", "--uppercase", "--punctuation", "?", "--greeting", "Hi", "--name", "Alice"], Repeat("HI: ALICE?", 2), "", 0),
+    ("Multiple character separator", ["--separator", " <=> "], "Hello <=> Codex Agent Practice!", "", 0),
+    ("Single character separator", ["--separator", ":"], "Hello:Codex Agent Practice!", "", 0),
+    ("Missing separator", ["--separator"], "", "Error: --separator requires a non-whitespace value.", 1),
+    ("Option instead of separator", ["--separator", "--name", "Alice"], "", "Error: --separator requires a non-whitespace value.", 1),
+    ("Empty separator", ["--separator", ""], "", "Error: --separator requires a non-whitespace value.", 1),
+    ("Whitespace separator", ["--separator", "  "], "", "Error: --separator requires a non-whitespace value.", 1),
+    ("Tab separator", ["--separator", "\t"], "", "Error: --separator requires a non-whitespace value.", 1),
+    ("Missing name with separator", ["--separator", ": ", "--name"], "", "Error: --name requires a name.", 1),
+    ("Missing greeting with separator", ["--separator", ": ", "--greeting"], "", "Error: --greeting requires a greeting.", 1),
+    ("Missing punctuation with separator", ["--separator", ": ", "--punctuation"], "", "Error: --punctuation requires a value.", 1),
+    ("Invalid repeat with separator", ["--separator", ": ", "--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Unknown argument with separator", ["--separator", ": ", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
 };
 
 var failures = 0;

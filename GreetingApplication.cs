@@ -4,12 +4,25 @@ public static class GreetingApplication
     {
         var name = "Codex Agent Practice";
         var greetingWord = "Hello";
+        var separator = ", ";
         var punctuation = "!";
         var uppercase = false;
         var repeat = 1;
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (args[i] == "--separator")
+            {
+                if (i + 1 >= args.Length || string.IsNullOrWhiteSpace(args[i + 1]) || args[i + 1].StartsWith("--"))
+                {
+                    error.WriteLine("Error: --separator requires a non-whitespace value.");
+                    return 1;
+                }
+
+                separator = args[++i];
+                continue;
+            }
+
             if (args[i] == "--punctuation")
             {
                 if (i + 1 >= args.Length || args[i + 1].StartsWith("--"))
@@ -74,7 +87,7 @@ public static class GreetingApplication
             name = args[++i];
         }
 
-        var greeting = $"{greetingWord}, {name}{punctuation}";
+        var greeting = $"{greetingWord}{separator}{name}{punctuation}";
         if (uppercase)
         {
             greeting = greeting.ToUpperInvariant();
