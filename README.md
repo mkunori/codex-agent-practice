@@ -15,7 +15,7 @@ dotnet run --project Tests/CodexAgentPractice.Tests.csproj
 
 ## 日常の開発
 
-Feature Issue に仕様と完了条件を書き、Codex に `Issue #XX を実装してください` と依頼します。Codex が作業ブランチで実装・検証し、commit / push、PR 作成、CI 確認まで進めます。人間がレビューし、変更内容を承認して merge を指示した後に squash merge、Issue の自動 close、ブランチの後片付けを行います。
+Feature Issue に仕様と完了条件を書き、Codex に `Issue #XX を実装し、レビュー可能なPRまで進めてください` と依頼します。このように commit / push / PR 作成までを依頼範囲に含めた場合、Codex が作業ブランチで実装・検証し、commit / push、PR 作成、CI 確認まで進めます。人間がレビューし、変更内容を承認して merge を指示した後に squash merge、Issue の自動 close、ブランチの後片付けを行います。
 
 ## 仕組みの入口
 
