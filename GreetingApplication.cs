@@ -4,11 +4,31 @@ public static class GreetingApplication
     {
         var name = "Codex Agent Practice";
         var greetingWord = "Hello";
+        var punctuation = "!";
         var uppercase = false;
         var repeat = 1;
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (args[i] == "--punctuation")
+            {
+                if (i + 1 >= args.Length || args[i + 1].StartsWith("--"))
+                {
+                    error.WriteLine("Error: --punctuation requires a value.");
+                    return 1;
+                }
+
+                punctuation = args[++i];
+                if (string.IsNullOrWhiteSpace(punctuation) ||
+                    new System.Globalization.StringInfo(punctuation).LengthInTextElements != 1)
+                {
+                    error.WriteLine("Error: --punctuation requires a single non-whitespace character.");
+                    return 1;
+                }
+
+                continue;
+            }
+
             if (args[i] == "--greeting")
             {
                 if (i + 1 >= args.Length || string.IsNullOrWhiteSpace(args[i + 1]) || args[i + 1].StartsWith("--"))
@@ -54,7 +74,7 @@ public static class GreetingApplication
             name = args[++i];
         }
 
-        var greeting = $"{greetingWord}, {name}!";
+        var greeting = $"{greetingWord}, {name}{punctuation}";
         if (uppercase)
         {
             greeting = greeting.ToUpperInvariant();

@@ -43,7 +43,25 @@ var cases = new (string Name, string[] Args, string Output, string Error, int Ex
     ("Whitespace greeting", ["--greeting", "  "], "", "Error: --greeting requires a greeting.", 1),
     ("Missing name with custom greeting", ["--greeting", "Hi", "--name"], "", "Error: --name requires a name.", 1),
     ("Invalid repeat with custom greeting", ["--greeting", "Hi", "--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
-    ("Unknown argument with custom greeting", ["--greeting", "Hi", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
+    ("Unknown argument with custom greeting", ["--greeting", "Hi", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1),
+    ("Punctuation", ["--punctuation", "?"], "Hello, Codex Agent Practice?", "", 0),
+    ("Name and punctuation", ["--name", "Alice", "--punctuation", "?"], "Hello, Alice?", "", 0),
+    ("Greeting and punctuation", ["--greeting", "Hi", "--punctuation", "?"], "Hi, Codex Agent Practice?", "", 0),
+    ("Uppercase and punctuation", ["--uppercase", "--punctuation", "?"], "HELLO, CODEX AGENT PRACTICE?", "", 0),
+    ("Repeat and punctuation", ["--repeat", "2", "--punctuation", "?"], Repeat("Hello, Codex Agent Practice?", 2), "", 0),
+    ("All options with punctuation", ["--name", "Alice", "--greeting", "Hi", "--punctuation", "?", "--uppercase", "--repeat", "2"], Repeat("HI, ALICE?", 2), "", 0),
+    ("Punctuation first", ["--punctuation", "?", "--repeat", "2", "--uppercase", "--greeting", "Hi", "--name", "Alice"], Repeat("HI, ALICE?", 2), "", 0),
+    ("Missing punctuation", ["--punctuation"], "", "Error: --punctuation requires a value.", 1),
+    ("Option instead of punctuation", ["--punctuation", "--uppercase"], "", "Error: --punctuation requires a value.", 1),
+    ("Empty punctuation", ["--punctuation", ""], "", "Error: --punctuation requires a single non-whitespace character.", 1),
+    ("Whitespace punctuation", ["--punctuation", " "], "", "Error: --punctuation requires a single non-whitespace character.", 1),
+    ("Multiple punctuation characters", ["--punctuation", "?!"], "", "Error: --punctuation requires a single non-whitespace character.", 1),
+    ("Unrestricted character type", ["--punctuation", "x"], "Hello, Codex Agent Practicex", "", 0),
+    ("Unicode punctuation", ["--punctuation", "😀"], "Hello, Codex Agent Practice😀", "", 0),
+    ("Missing name with punctuation", ["--punctuation", "?", "--name"], "", "Error: --name requires a name.", 1),
+    ("Missing greeting with punctuation", ["--punctuation", "?", "--greeting"], "", "Error: --greeting requires a greeting.", 1),
+    ("Invalid repeat with punctuation", ["--punctuation", "?", "--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Unknown argument with punctuation", ["--punctuation", "?", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
 };
 
 var failures = 0;
