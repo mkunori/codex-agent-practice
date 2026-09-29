@@ -28,7 +28,22 @@ var cases = new (string Name, string[] Args, string Output, string Error, int Ex
     ("Overflow repeat", ["--repeat", "2147483648"], "", "Error: --repeat requires a positive integer.", 1),
     ("Option instead of repeat value", ["--repeat", "--uppercase"], "", "Error: --repeat requires a positive integer.", 1),
     ("Missing name with repeat", ["--repeat", "2", "--name"], "", "Error: --name requires a name.", 1),
-    ("Unknown argument with repeat", ["--repeat", "2", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
+    ("Unknown argument with repeat", ["--repeat", "2", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1),
+    ("Custom greeting", ["--greeting", "Hi"], "Hi, Codex Agent Practice!", "", 0),
+    ("Greeting before name", ["--greeting", "Hi", "--name", "Alice"], "Hi, Alice!", "", 0),
+    ("Greeting after name", ["--name", "Alice", "--greeting", "Hi"], "Hi, Alice!", "", 0),
+    ("Uppercase custom greeting", ["--greeting", "Hi", "--uppercase"], "HI, CODEX AGENT PRACTICE!", "", 0),
+    ("Repeat custom greeting", ["--greeting", "Hi", "--repeat", "2"], Repeat("Hi, Codex Agent Practice!", 2), "", 0),
+    ("All options with custom greeting", ["--name", "Alice", "--greeting", "Hi", "--uppercase", "--repeat", "2"], Repeat("HI, ALICE!", 2), "", 0),
+    ("Custom greeting last", ["--repeat", "2", "--uppercase", "--name", "Alice", "--greeting", "Hi"], Repeat("HI, ALICE!", 2), "", 0),
+    ("Missing greeting", ["--greeting"], "", "Error: --greeting requires a greeting.", 1),
+    ("Uppercase instead of greeting", ["--greeting", "--uppercase"], "", "Error: --greeting requires a greeting.", 1),
+    ("Name option instead of greeting", ["--greeting", "--name", "Alice"], "", "Error: --greeting requires a greeting.", 1),
+    ("Empty greeting", ["--greeting", ""], "", "Error: --greeting requires a greeting.", 1),
+    ("Whitespace greeting", ["--greeting", "  "], "", "Error: --greeting requires a greeting.", 1),
+    ("Missing name with custom greeting", ["--greeting", "Hi", "--name"], "", "Error: --name requires a name.", 1),
+    ("Invalid repeat with custom greeting", ["--greeting", "Hi", "--repeat", "0"], "", "Error: --repeat requires a positive integer.", 1),
+    ("Unknown argument with custom greeting", ["--greeting", "Hi", "--unknown"], "", "Error: Unknown argument '--unknown'.", 1)
 };
 
 var failures = 0;
